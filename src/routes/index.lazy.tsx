@@ -8,6 +8,7 @@ function Index() {
   return (
     <>
       <div className="text-xl font-bold">Hey Ya</div>
+      test
     </>
   );
 }
