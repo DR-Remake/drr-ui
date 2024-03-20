@@ -31,7 +31,7 @@ function App() {
       <div className="flex-1">
         <Outlet />
       </div>
-      <div>
+      <div className="bg-footer bg-cover bg-center py-20">
         <footer>Hola</footer>
       </div>
     </div>
