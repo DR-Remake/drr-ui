@@ -43,12 +43,7 @@ function App() {
         </div>
         <div className="flex items-center justify-center gap-2">
           <span>Developed by</span>
-          <a
-            href="https://www.linkedin.com/in/daniel-alejandro-ramirez-ramirez-3b1b5b1b0/"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="font-bold"
-          >
+          <a href="https://github.com/StrafeYosef" target="_blank" rel="noreferrer noopener" className="font-bold">
             @Yoseful
           </a>
           <span>and</span>
