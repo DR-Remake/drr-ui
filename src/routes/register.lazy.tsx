@@ -29,7 +29,7 @@ function Register() {
           borderImageSlice: "30"
         }}
       >
-        <div className="mx-auto text-2xl font-bold">Create New Account</div>
+        <div className="mx-auto text-2xl font-bold uppercase">Create New Account</div>
         <form onSubmit={submitHandler} className="w-full space-y-4">
           <Input label="Username" name="username" />
           <Input label="Email" name="email" />
