@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import borderImage from "../assets/border.svg";
 import { RegisterSchema } from "../types/register";
 
 export const Route = createLazyFileRoute("/register")({
@@ -24,7 +25,12 @@ function Register() {
   return (
     <form
       onSubmit={submitHandler}
-      className="mx-auto flex w-2/4 flex-col items-start gap-4 rounded-md border-4 border-border bg-primary bg-cover bg-center bg-no-repeat p-8"
+      className="mx-auto flex w-2/4 flex-col items-start gap-4 rounded-md border-4 bg-primary p-8"
+      style={{
+        border: "20px solid",
+        borderImage: `url(${borderImage}) 20`,
+        borderImageSlice: "30"
+      }}
     >
       <div className="text-xl font-bold">Register</div>
       <input
