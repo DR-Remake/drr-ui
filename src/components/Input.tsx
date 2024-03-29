@@ -14,10 +14,11 @@ export function Input<T extends FieldValues>({
       name={name}
       render={({ field, fieldState: { error } }) => (
         <div className="flex w-full flex-col gap-1.5">
-          <label htmlFor={name} className={cn({ "text-red-500": error })}>
+          <label htmlFor={name} className={cn("text-sm font-bold", { "text-red-500": error })}>
             {label}
           </label>
           <input
+            autoComplete="off"
             id={name}
             className={cn(
               "w-full rounded-md border-2 border-gray-300 px-4 py-2 text-black focus:outline-none",
