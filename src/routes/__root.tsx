@@ -8,7 +8,8 @@ export const Route = createRootRoute({
 
 function App() {
   return (
-    <div className="flex h-full min-h-screen flex-col bg-main-layout bg-cover bg-center text-white">
+    <div className="flex h-full min-h-screen flex-col text-white">
+      <div className="fixed inset-0 -z-10 size-full flex-1 bg-main-layout bg-cover bg-center bg-no-repeat"></div>
       <div className="flex items-center justify-between px-8">
         <header>
           <Link to="/">
@@ -25,12 +26,14 @@ function App() {
           </div>
         </nav>
       </div>
-      <div className="flex-1 px-8">
+      <div className="container m-auto flex-1 px-8">
         <Outlet />
       </div>
       <footer className="bg-footer bg-cover bg-center py-20">
         <div className="flex items-center justify-center gap-4 font-semibold uppercase">
           <p>Home</p>
+          <p>|</p>
+          <p>Blog</p>
           <p>|</p>
           <p>Help</p>
           <p>|</p>
