@@ -1,26 +1,23 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createLazyFileRoute } from "@tanstack/react-router";
+import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import borderImage from "../assets/border.svg";
 import { Input } from "../components/Input";
 import { loginInputs } from "../constants/authData";
 import { loginSchema } from "../validation/login";
-import React from "react";
 
 export const Route = createLazyFileRoute("/login")({
   component: Login
 });
 
 function Login() {
-  console.log(loginSchema);
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema)
   });
 
-  const submitHandler = form.handleSubmit((data) => {
-    console.log(data);
-  });
+  const submitHandler = form.handleSubmit((data) => {});
 
   return (
     <FormProvider {...form}>

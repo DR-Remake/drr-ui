@@ -1,10 +1,11 @@
 import { z } from "zod";
+import { TValidationKey } from "../types/zodTypes";
 
-export const dynamicZod = (keys, validatePass = false) =>
+export const dynamicZod = (keys: TValidationKey[], validatePass = false) =>
   z
     .object(
       keys.reduce(
-        (acc, { name, min = 3, max = 32 }) => {
+        (acc, { name = "", min = 3, max = 32 }) => {
           acc[name] = z
             .string({
               required_error: `${name} is required.`

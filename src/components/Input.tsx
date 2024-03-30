@@ -13,7 +13,6 @@ export function Input<T extends FieldValues>({
       control={control}
       name={name}
       render={({ field, fieldState: { error } }) => {
-        console.log(error);
         return (
           <div className="flex w-full flex-col gap-1.5">
             <label htmlFor={name} className={cn("text-sm font-bold", { "text-red-500": error })}>

@@ -1,5 +1,5 @@
-import { arrayStrings } from "../types/popularFormats";
+import { TArrayStrings } from "../types/popularFormats";
 
-export const loginInputs: arrayStrings = ["Email", "Password"];
+export const loginInputs: TArrayStrings = ["Email", "Password"];
 
-export const registerInputs: arrayStrings = ["Username", ...loginInputs, "Confirm Password"];
+export const registerInputs: TArrayStrings = ["Username", ...loginInputs, "Confirm Password"];

@@ -1,5 +1,5 @@
-export type objStrings = {
+export type TObjStrings = {
   [key: string]: string;
 };
 
-export type arrayStrings = string[]
+export type TArrayStrings = string[]
