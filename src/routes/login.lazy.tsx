@@ -3,19 +3,20 @@ import { createLazyFileRoute } from "@tanstack/react-router";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import borderImage from "../assets/border.svg";
-import useGenerateInputs from "../hooks/useGenerateInputs";
-import { loginSchema } from "../types/login";
+import { Input } from "../components/Input";
+import { loginInputs } from "../constants/authData";
+import { loginSchema } from "../validation/login";
+import React from "react";
 
 export const Route = createLazyFileRoute("/login")({
   component: Login
 });
 
 function Login() {
+  console.log(loginSchema);
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema)
   });
-
-  const inputs = useGenerateInputs({ array: ["Email", "Password"] });
 
   const submitHandler = form.handleSubmit((data) => {
     console.log(data);
@@ -31,14 +32,27 @@ function Login() {
           borderImageSlice: "30"
         }}
       >
-        <div className="mx-auto text-2xl font-bold uppercase">Login</div>
         <form onSubmit={submitHandler} className="w-full space-y-4">
-          {inputs}
+          <h1 className="mx-auto text-2xl font-bold uppercase">Login</h1>
+          {loginInputs.map((login: string, i: number) => {
+            const loweredCaseLogin: string = login.toLowerCase();
+            return (
+              <React.Fragment key={`loginInputs${i}`}>
+                <Input
+                  label={login}
+                  name={loweredCaseLogin}
+                  type={loweredCaseLogin.includes("password") ? "password" : "text"}
+                />
+              </React.Fragment>
+            );
+          })}
           <button className="rounded-md border border-gray-50 px-4 py-2 text-sm font-semibold uppercase" type="submit">
-            Create
+            Login
           </button>
         </form>
       </div>
     </FormProvider>
   );
 }
+
+export default Login;
