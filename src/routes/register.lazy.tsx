@@ -33,10 +33,10 @@ function Register() {
         <form onSubmit={submitHandler} className="w-full space-y-4">
           <Input label="Username" name="username" />
           <Input label="Email" name="email" />
-          <Input label="Password" name="password" />
-          <Input label="Confirm Password" name="passwordConfirmation" />
-          <button className="rounded-md border border-gray-50 px-4 py-2" type="submit">
-            Register
+          <Input label="Password" name="password" type="password" />
+          <Input label="Confirm Password" name="passwordConfirmation" type="password" />
+          <button className="rounded-md border border-gray-50 px-4 py-2 text-sm font-semibold uppercase" type="submit">
+            Create
           </button>
         </form>
       </div>
