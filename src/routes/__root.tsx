@@ -17,9 +17,15 @@ function App() {
           </Link>
         </header>
         <nav>
-          <div className="flex gap-2">
+          <div className="flex gap-4">
             {siteConfig.navbar.map((item) => (
-              <Link key={item.path} to={item.path} className="px-3 py-2">
+              <Link
+                key={item.path}
+                to={item.path}
+                activeOptions={{ exact: true }}
+                activeProps={{ className: "bg-white text-primary" }}
+                className="rounded-md px-3 py-2 font-bold transition-colors hover:bg-white hover:text-primary"
+              >
                 {item.label}
               </Link>
             ))}
@@ -29,7 +35,7 @@ function App() {
       <div className="container m-auto flex-1 px-8">
         <Outlet />
       </div>
-      <footer className="bg-footer bg-cover bg-center py-20">
+      <footer className="bg-footer bg-cover bg-center px-8 py-20">
         <div className="flex items-center justify-center gap-4 font-semibold uppercase">
           <p>Home</p>
           <p>|</p>
