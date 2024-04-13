@@ -1,61 +1,45 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
+import borderImage from "../assets/border.svg";
+import { Input } from "../components/Input";
+import { RegisterSchema } from "../types/register";
 
 export const Route = createLazyFileRoute("/register")({
   component: Register
 });
 
-const schema = z
-  .object({
-    username: z.string().min(3).max(32),
-    email: z.string().email(),
-    password: z.string().min(8).max(32),
-    passwordConfirmation: z.string().min(8).max(32)
-  })
-  .refine((data) => data.password === data.passwordConfirmation, {
-    message: "Passwords do not match",
-    path: ["passwordConfirmation"]
+function Register() {
+  const form = useForm<z.infer<typeof RegisterSchema>>({
+    resolver: zodResolver(RegisterSchema)
   });
 
-function Register() {
-  const form = useForm({
-    resolver: zodResolver(schema)
+  const submitHandler = form.handleSubmit((data) => {
+    console.log(data);
   });
 
   return (
-    <>
-      <form className="mx-auto flex w-2/4 flex-col items-start gap-4 rounded-md border-4 border-border bg-primary bg-cover bg-center bg-no-repeat p-8">
-        <div className="text-xl font-bold">Register</div>
-        <input
-          {...form.register("username")}
-          placeholder="Username"
-          type="text"
-          className="w-full rounded-md border border-gray-300 px-4 py-2 text-black focus:outline-none"
-        />
-        <input
-          {...form.register("email")}
-          placeholder="Email"
-          type="email"
-          className="w-full rounded-md border border-gray-300 px-4 py-2 text-black focus:outline-none"
-        />
-        <input
-          {...form.register("password")}
-          placeholder="Password"
-          type="password"
-          className="w-full rounded-md border border-gray-300 px-4 py-2 text-black focus:outline-none"
-        />
-        <input
-          {...form.register("passwordConfirmation")}
-          placeholder="Confirm Password"
-          type="password"
-          className="w-full rounded-md border border-gray-300 px-4 py-2 text-black focus:outline-none"
-        />
-        <button className="rounded-md border border-gray-50 px-4 py-2" type="button">
-          Register
-        </button>
-      </form>
-    </>
+    <FormProvider {...form}>
+      <div
+        className="mx-auto flex w-2/4 flex-col items-start gap-4 rounded-md border-4 bg-primary p-8"
+        style={{
+          border: "20px solid",
+          borderImage: `url(${borderImage}) 20`,
+          borderImageSlice: "30"
+        }}
+      >
+        <div className="mx-auto text-2xl font-bold uppercase">Create New Account</div>
+        <form onSubmit={submitHandler} className="w-full space-y-4">
+          <Input label="Username" name="username" />
+          <Input label="Email" name="email" />
+          <Input label="Password" name="password" type="password" />
+          <Input label="Confirm Password" name="passwordConfirmation" type="password" />
+          <button className="rounded-md border border-gray-50 px-4 py-2 text-sm font-semibold uppercase" type="submit">
+            Create
+          </button>
+        </form>
+      </div>
+    </FormProvider>
   );
 }
