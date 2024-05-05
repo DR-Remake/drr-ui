@@ -1,37 +1,43 @@
-import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
-import logo from "../assets/drr-logo.png";
-import { siteConfig } from "../config/siteConfig";
+import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { useEffect } from "react";
+import NavBar from "../components/Header/NavBar";
+import { validateUserSession } from "../lib/utils";
+import { useAuth } from "../zustand/store";
 
 export const Route = createRootRoute({
   component: App
 });
 
 function App() {
+  const isAuthenticated = useAuth((state) => state.isAuthenticated);
+  const login = useAuth((state) => state.login);
+
+  const setSession = async () => {
+    try {
+      const session = localStorage.getItem("session");
+      if (!session) return;
+      const { user, isAuthenticated: authenticated, token } = await validateUserSession({ session });
+      // TODO: Should we redirect to login page if not authenticated?
+      if (!authenticated) {
+        localStorage.removeItem("session");
+        return;
+      }
+      login({ user, isAuthenticated: authenticated, token });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (!isAuthenticated) setSession();
+  }, []);
+
   return (
     <div className="flex h-full min-h-screen flex-col text-white">
       <div className="fixed inset-0 -z-10 size-full flex-1 bg-main-layout bg-cover bg-center bg-no-repeat"></div>
-      <div className="flex items-center justify-between px-8">
-        <header>
-          <Link to="/">
-            <img src={logo} alt="logo" className="h-32" />
-          </Link>
-        </header>
-        <nav>
-          <div className="flex gap-4">
-            {siteConfig.navbar.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                activeOptions={{ exact: true }}
-                activeProps={{ className: "bg-white text-primary" }}
-                className="rounded-md px-3 py-2 font-bold transition-colors hover:bg-white hover:text-primary"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-        </nav>
-      </div>
+      <header className="flex items-center justify-between px-8">
+        <NavBar />
+      </header>
       <div className="container m-auto flex-1 px-8">
         <Outlet />
       </div>
@@ -49,10 +55,6 @@ function App() {
         </div>
         <div className="flex items-center justify-center gap-2">
           <span>Developed by</span>
-          <a href="https://github.com/StrafeYosef" target="_blank" rel="noreferrer noopener" className="font-bold">
-            @Yoseful
-          </a>
-          <span>and</span>
           <a
             href="https://www.linkedin.com/in/carlos-alberto-garcia-cifuentes-b90410210/"
             target="_blank"
@@ -60,6 +62,10 @@ function App() {
             className="font-bold"
           >
             @CarlinGebyte
+          </a>
+          <span>and</span>
+          <a href="https://github.com/StrafeYosef" target="_blank" rel="noreferrer noopener" className="font-bold">
+            @Yoseful
           </a>
         </div>
       </footer>
