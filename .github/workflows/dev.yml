@@ -6,9 +6,9 @@ on:
       - dev
 
 env:
-  NODE_VERSION: '21.x'
-  VITE_BASE_API: ${{ vars.VITE_DEV_BASE_API }}
-  VITE_ADMIN_PASS: ${{ vars.VITE_ADMIN_PASS }}
+  NODE_VERSION: "21.x"
+  # VITE_BASE_API: ${{ vars.VITE_DEV_BASE_API }}
+  # VITE_ADMIN_PASS: ${{ vars.VITE_ADMIN_PASS }}
 
 jobs:
   build:
