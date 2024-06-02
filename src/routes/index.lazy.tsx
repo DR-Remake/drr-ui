@@ -1,5 +1,5 @@
+import borderImage from "@/assets/border.svg";
 import { createLazyFileRoute } from "@tanstack/react-router";
-import borderImage from "../assets/border.svg";
 
 export const Route = createLazyFileRoute("/")({
   component: Index

@@ -8,11 +8,18 @@ export const siteConfig = {
     },
     {
       label: "Login",
-      path: "/login"
+      path: "/login",
+      hideInAuth: true
     },
     {
       label: "Register",
-      path: "/register"
+      path: "/register",
+      hideInAuth: true
+    },
+    {
+      label: "Profile",
+      path: "/profile",
+      isAuth: true
     }
   ]
 };
