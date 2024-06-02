@@ -1,0 +1,51 @@
+name: Deploy Production Enviroment
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  NODE_VERSION: '21.x'
+  VITE_BASE_API: ${{ vars.VITE_BASE_API }}
+  VITE_ADMIN_PASS: ${{ vars.VITE_ADMIN_PASS }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Install dependencies
+        run: npm install
+      - name: Run linter and format
+        run: npm run lint && npm run format
+      - name: Build
+        run: npm run build
+      - name: Delete unnecessary files
+        run: |
+          shopt -s dotglob
+          # move .htaccess to dist
+          mv .htaccess dist
+          # rm all files in root except dist folder
+          git rm -r . 
+          # Move deployment files to root
+          mv dist/* .
+          rm -rf dist node_modules package-lock.json
+          git add .
+      - name: commit
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Deploy to development-deploy"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          branch: prod-deploy
+          force: true

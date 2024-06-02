@@ -34,7 +34,7 @@ export default function VerifyEmailForm({ onCancel, onsubmit }: Props) {
   });
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-1">
         <FormField
           name="code"
           render={({ field }) => (
@@ -47,12 +47,12 @@ export default function VerifyEmailForm({ onCancel, onsubmit }: Props) {
             </FormItem>
           )}
         />
-        <div className="flex flex-col items-start gap-4">
-          <Button variant="outline" type="button">
+        <div className="flex flex-col items-start gap-2">
+          <Button variant="link" className="h-min p-0 py-1" type="button">
             Resend Code
           </Button>
           <div className="flex gap-4">
-            <Button variant="default" type="button" onClick={onCancel}>
+            <Button variant="default" className="h-fit" type="button" onClick={onCancel}>
               Cancel
             </Button>
             <Button variant="default" type="submit">
