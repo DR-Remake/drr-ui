@@ -39,7 +39,7 @@ export default function Profile() {
           >
             Verify Email
           </Button>
-        )}{" "}
+        )}
       </div>
     </div>
   );

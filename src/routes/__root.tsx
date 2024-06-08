@@ -16,13 +16,13 @@ function App() {
     try {
       const session = localStorage.getItem("session");
       if (!session) return;
-      const { user, isAuthenticated: authenticated, token } = await validateUserSession({ session });
+      const { user, isAuthenticated: authenticated } = await validateUserSession({ session });
       // TODO: Should we redirect to login page if not authenticated?
       if (!authenticated) {
         localStorage.removeItem("session");
         return;
       }
-      login({ user, isAuthenticated: authenticated, token });
+      login({ user, isAuthenticated: authenticated, token: session });
     } catch (error) {
       console.log(error);
     }

@@ -54,13 +54,32 @@ export async function registerRequest({
   return Promise.resolve({ user, token });
 }
 
-export async function verifyEmailRequest({ email, code }: { email: string; code: string }) {
+export async function verifyEmailRequest({ email, code, token }: { email: string; code: string; token: string }) {
   const res = await fetch("http://localhost:3000/api/auth/verifyemail", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
     },
     body: JSON.stringify({ email, code })
+  });
+  const { data, error } = await res.json();
+  console.log(data, error);
+  if (!res.ok) {
+    if (!error) return Promise.reject(new Error("An error occurred"));
+    return Promise.reject(error);
+  }
+  return Promise.resolve(data);
+}
+
+export async function getNewVerificationCode({ email, token }: { email: string; token: string }) {
+  const res = await fetch("http://localhost:3000/api/auth/getverificationcode", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({ email })
   });
   const { data, error } = await res.json();
   if (!res.ok) {

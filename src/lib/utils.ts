@@ -13,7 +13,7 @@ export async function validateUserSession({ session }: { session: string }) {
     }
   });
   const { data, error } = await res.json();
-  console.log(data, error);
+  console.log(data);
   if (!res.ok) {
     if (!error) return Promise.reject(new Error("An error occurred"));
     return Promise.reject(error);
