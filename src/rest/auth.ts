@@ -64,7 +64,6 @@ export async function verifyEmailRequest({ email, code, token }: { email: string
     body: JSON.stringify({ email, code })
   });
   const { data, error } = await res.json();
-  console.log(data, error);
   if (!res.ok) {
     if (!error) return Promise.reject(new Error("An error occurred"));
     return Promise.reject(error);
