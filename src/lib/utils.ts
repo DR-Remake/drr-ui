@@ -1,3 +1,4 @@
+import { siteConfig } from "@/config/siteConfig";
 import clsx, { ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -6,7 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export async function validateUserSession({ session }: { session: string }) {
-  const res = await fetch("http://localhost:3000/api/auth/validatesession", {
+  const res = await fetch(`${siteConfig.env.BASE_API}/auth/validatesession`, {
     headers: {
       Method: "GET",
       Authorization: `Bearer ${session}`
