@@ -1,3 +1,5 @@
+import { siteConfig } from "@/config/siteConfig";
+
 export const updateAvatarRequest = async ({
   avatar,
   token,
@@ -7,7 +9,7 @@ export const updateAvatarRequest = async ({
   token: string;
   userEmail: string;
 }) => {
-  const res = await fetch(`http://localhost:3000/api/users/changeavatar`, {
+  const res = await fetch(`${siteConfig.env.BASE_API}/users/changeavatar`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

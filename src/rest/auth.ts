@@ -1,7 +1,8 @@
+import { siteConfig } from "@/config/siteConfig";
 import { User } from "../types/zustand";
 
 export async function loginRequest({ username, password }: { username: string; password: string }) {
-  const res = await fetch("http://localhost:3000/api/auth/login", {
+  const res = await fetch(`${siteConfig.env.BASE_API}/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -24,7 +25,7 @@ export async function loginRequest({ username, password }: { username: string; p
 }
 
 export async function logoutRequest({ token }: { token: string }) {
-  const res = await fetch("http://localhost:3000/api/auth/logout", {
+  const res = await fetch(`${siteConfig.env.BASE_API}/auth/logout`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -48,7 +49,7 @@ export async function registerRequest({
   email: string;
   password: string;
 }) {
-  const res = await fetch("http://localhost:3000/api/auth/register", {
+  const res = await fetch(`${siteConfig.env.BASE_API}/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -71,7 +72,7 @@ export async function registerRequest({
 }
 
 export async function verifyEmailRequest({ email, code, token }: { email: string; code: string; token: string }) {
-  const res = await fetch("http://localhost:3000/api/auth/verifyemail", {
+  const res = await fetch(`${siteConfig.env.BASE_API}/auth/verifyemail`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -88,7 +89,7 @@ export async function verifyEmailRequest({ email, code, token }: { email: string
 }
 
 export async function getNewVerificationCode({ email, token }: { email: string; token: string }) {
-  const res = await fetch("http://localhost:3000/api/auth/getverificationcode", {
+  const res = await fetch(`${siteConfig.env.BASE_API}/auth/getverificationcode`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
