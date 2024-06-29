@@ -1,7 +1,8 @@
+import ResendButton from "@/components/ResendButton";
 import { Button } from "@/components/ui/Button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/Form";
 import { Input } from "@/components/ui/Input";
-import { verifyEmailRequest } from "@/rest/auth";
+import { getNewVerificationCode, verifyEmailRequest } from "@/rest/auth";
 import { verifyEmailSchema } from "@/types/profile";
 import { useAuth } from "@/zustand/store";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,6 +15,7 @@ interface Props {
 }
 export default function VerifyEmailForm({ onCancel, onsubmit }: Props) {
   const user = useAuth((state) => state.user);
+  const token = useAuth((state) => state.token);
   const form = useForm<z.infer<typeof verifyEmailSchema>>({
     defaultValues: {
       code: "",
@@ -24,14 +26,24 @@ export default function VerifyEmailForm({ onCancel, onsubmit }: Props) {
 
   const handleSubmit = form.handleSubmit(async (data) => {
     try {
-      const { message } = await verifyEmailRequest(data);
-
+      if (!token) throw new Error("Token is missing");
+      const { message } = await verifyEmailRequest({ ...data, token });
       console.log(message);
       onsubmit();
     } catch (error) {
       console.error(error);
     }
   });
+
+  const getVerificationCode = async () => {
+    try {
+      if (!user || !token) return;
+      const { message } = await getNewVerificationCode({ email: user.email, token });
+      console.log(message);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <Form {...form}>
       <form onSubmit={handleSubmit} className="flex flex-col gap-1">
@@ -48,14 +60,17 @@ export default function VerifyEmailForm({ onCancel, onsubmit }: Props) {
           )}
         />
         <div className="flex flex-col items-start gap-2">
-          <Button variant="link" className="h-min p-0 py-1" type="button">
-            Resend Code
-          </Button>
-          <div className="flex gap-4">
-            <Button variant="default" className="h-fit" type="button" onClick={onCancel}>
+          <ResendButton handleClick={getVerificationCode} />
+          <div className="flex gap-2">
+            <Button
+              variant="default"
+              className="bg-[#4e1606] text-white hover:bg-[#4e1606] hover:opacity-80"
+              type="button"
+              onClick={onCancel}
+            >
               Cancel
             </Button>
-            <Button variant="default" type="submit">
+            <Button variant="default" className="bg-white text-[#4e1606] hover:bg-white hover:opacity-80" type="submit">
               Verify
             </Button>
           </div>

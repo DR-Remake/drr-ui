@@ -1,37 +1,31 @@
-import { createRootRoute, Outlet } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { Loader } from "@/components/Loader";
+import { validateUserSession } from "@/lib/utils";
+import { AuthActions, AuthState } from "@/types/zustand";
+import { createRootRouteWithContext, Navigate, Outlet } from "@tanstack/react-router";
 import NavBar from "../components/Header/NavBar";
-import { validateUserSession } from "../lib/utils";
-import { useAuth } from "../zustand/store";
 
-export const Route = createRootRoute({
-  component: App
-});
-
-function App() {
-  const isAuthenticated = useAuth((state) => state.isAuthenticated);
-  const login = useAuth((state) => state.login);
-
-  const setSession = async () => {
-    try {
+export const Route = createRootRouteWithContext<Pick<AuthState, "isAuthenticated"> & Pick<AuthActions, "login">>()({
+  component: App,
+  notFoundComponent: () => <Navigate to="/" replace />,
+  wrapInSuspense: true,
+  pendingComponent: () => <Loader />,
+  beforeLoad: async ({ context }) => {
+    if (!context.isAuthenticated) {
       const session = localStorage.getItem("session");
       if (!session) return;
-      const { user, isAuthenticated: authenticated, token } = await validateUserSession({ session });
-      // TODO: Should we redirect to login page if not authenticated?
+      const { isAuthenticated: authenticated, user } = await validateUserSession({ session });
+      context.login({ isAuthenticated: authenticated, user, token: session });
       if (!authenticated) {
         localStorage.removeItem("session");
         return;
       }
-      login({ user, isAuthenticated: authenticated, token });
-    } catch (error) {
-      console.log(error);
+      return;
     }
-  };
+    return;
+  }
+});
 
-  useEffect(() => {
-    if (!isAuthenticated) setSession();
-  }, []);
-
+function App() {
   return (
     <div className="flex h-full min-h-screen flex-col text-white">
       <div className="fixed inset-0 -z-10 size-full flex-1 bg-main-layout bg-cover bg-center bg-no-repeat"></div>
