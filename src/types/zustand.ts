@@ -1,13 +1,26 @@
 export interface User {
   email: string;
+  avatar: string;
   username: string;
-  isEmailVerified: boolean;
+  isVerifiedEmail: boolean;
 }
 
-export interface AuthStore {
+export interface AuthState {
   isAuthenticated: boolean;
   user: User | null;
   token: string | null;
-  login: ({ user, isAuthenticated, token }: { user: User; isAuthenticated: boolean; token: string }) => void;
+}
+
+export interface AuthActions {
+  login: ({
+    user,
+    isAuthenticated,
+    token
+  }: {
+    user: AuthState["user"];
+    isAuthenticated: AuthState["isAuthenticated"];
+    token: AuthState["token"];
+  }) => void;
+  updateAvatar: ({ avatar }: { avatar: string }) => void;
   logout: () => void;
 }

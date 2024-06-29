@@ -34,7 +34,7 @@ export default function ResendButton({ handleClick }: Props) {
     <div>
       <Button
         variant="link"
-        className="h-min p-0 py-1"
+        className="h-min p-0 py-1 text-white"
         disabled={isButtonDisabled}
         onClick={handleButtonClick}
         type="button"

@@ -23,6 +23,22 @@ export async function loginRequest({ username, password }: { username: string; p
   return Promise.resolve({ user, token });
 }
 
+export async function logoutRequest({ token }: { token: string }) {
+  const res = await fetch("http://localhost:3000/api/auth/logout", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    }
+  });
+  const { data, error } = await res.json();
+  if (!res.ok) {
+    if (!error) return Promise.reject(new Error("An error occurred"));
+    return Promise.reject(new Error(error));
+  }
+  return Promise.resolve(data);
+}
+
 export async function registerRequest({
   username,
   email,

@@ -28,7 +28,6 @@ export default function VerifyEmailForm({ onCancel, onsubmit }: Props) {
     try {
       if (!token) throw new Error("Token is missing");
       const { message } = await verifyEmailRequest({ ...data, token });
-
       console.log(message);
       onsubmit();
     } catch (error) {
@@ -62,11 +61,16 @@ export default function VerifyEmailForm({ onCancel, onsubmit }: Props) {
         />
         <div className="flex flex-col items-start gap-2">
           <ResendButton handleClick={getVerificationCode} />
-          <div className="flex gap-4">
-            <Button variant="default" type="button" onClick={onCancel}>
+          <div className="flex gap-2">
+            <Button
+              variant="default"
+              className="bg-[#4e1606] text-white hover:bg-[#4e1606] hover:opacity-80"
+              type="button"
+              onClick={onCancel}
+            >
               Cancel
             </Button>
-            <Button variant="default" type="submit">
+            <Button variant="default" className="bg-white text-[#4e1606] hover:bg-white hover:opacity-80" type="submit">
               Verify
             </Button>
           </div>

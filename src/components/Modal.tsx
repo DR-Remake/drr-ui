@@ -16,11 +16,11 @@ export default function Modal({
 }) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
-        <DialogTitle>
-          <h3 className="text-2xl font-bold">{title}</h3>
+      <DialogContent className={cn("bg-background text-white", className)}>
+        <DialogTitle className="text-center">
+          <h3 className="text-3xl font-bold">{title}</h3>
         </DialogTitle>
-        <div className={cn(className)}>{children}</div>
+        <div>{children}</div>
       </DialogContent>
     </Dialog>
   );
