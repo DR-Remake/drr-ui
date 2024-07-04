@@ -1,5 +1,4 @@
 import { Loader } from "@/components/Loader";
-import { validateUserSession } from "@/lib/utils";
 import { AuthActions, AuthState } from "@/types/zustand";
 import { createRootRouteWithContext, Navigate, Outlet } from "@tanstack/react-router";
 import NavBar from "../components/Header/NavBar";
@@ -8,21 +7,8 @@ export const Route = createRootRouteWithContext<Pick<AuthState, "isAuthenticated
   component: App,
   notFoundComponent: () => <Navigate to="/" replace />,
   wrapInSuspense: true,
-  pendingComponent: () => <Loader />,
-  beforeLoad: async ({ context }) => {
-    if (!context.isAuthenticated) {
-      const session = localStorage.getItem("session");
-      if (!session) return;
-      const { isAuthenticated: authenticated, user } = await validateUserSession({ session });
-      context.login({ isAuthenticated: authenticated, user, token: session });
-      if (!authenticated) {
-        localStorage.removeItem("session");
-        return;
-      }
-      return;
-    }
-    return;
-  }
+  pendingComponent: Loader,
+  loader: Loader
 });
 
 function App() {
