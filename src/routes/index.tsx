@@ -20,9 +20,9 @@ export const Route = createFileRoute("/")({
       const { isAuthenticated, user, error } = await validateUserSession({ session });
       console.log(error);
 
-      console.log("Session expired");
       context.login({ isAuthenticated, user, token: session });
       if (!isAuthenticated) {
+        console.log("Session expired");
         localStorage.removeItem("session");
         throw redirect({ to: "/login" });
       }
