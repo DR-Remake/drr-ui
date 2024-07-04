@@ -4,20 +4,30 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   component: Index,
+  errorComponent: ({ error }) => (
+    <div>
+      <h1>Error</h1>
+      <p>{error.stack}</p>
+    </div>
+  ),
   beforeLoad: async ({ context }) => {
-    if (context.isAuthenticated) {
-      return;
-    }
-    const session = localStorage.getItem("session") ?? "";
-    if (!session) {
-      console.log("chata");
-      return;
-    }
-    const { isAuthenticated, user } = await validateUserSession({ session });
-    context.login({ isAuthenticated, user, token: session });
-    if (!isAuthenticated) {
-      localStorage.removeItem("session");
-      throw redirect({ to: "/profile" });
+    try {
+      if (context.isAuthenticated) return;
+
+      const session = localStorage.getItem("session") ?? null;
+      if (!session) return;
+
+      const { isAuthenticated, user, error } = await validateUserSession({ session });
+      console.log(error);
+
+      console.log("Session expired");
+      context.login({ isAuthenticated, user, token: session });
+      if (!isAuthenticated) {
+        localStorage.removeItem("session");
+        throw redirect({ to: "/login" });
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
 });
