@@ -48,6 +48,6 @@ export const siteConfig = {
     }
   ],
   env: {
-    BASE_API: import.meta.env.BASE_API ?? "http://localhost:3000/api"
+    BASE_API: import.meta.env.VITE_BASE_API ?? "http://localhost:3000/api"
   }
 };
