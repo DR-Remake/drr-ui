@@ -1,3 +1,4 @@
+import Modal from "@/components/Modal";
 import ResendButton from "@/components/ResendButton";
 import { Button } from "@/components/ui/Button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/Form";
@@ -10,10 +11,11 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 interface Props {
+  open: boolean;
   onsubmit: () => void;
   onCancel: () => void;
 }
-export default function VerifyEmailForm({ onCancel, onsubmit }: Props) {
+export default function VerifyEmailForm({ open, onCancel, onsubmit }: Props) {
   const user = useAuth((state) => state.user);
   const token = useAuth((state) => state.token);
   const form = useForm<z.infer<typeof verifyEmailSchema>>({
@@ -45,37 +47,43 @@ export default function VerifyEmailForm({ onCancel, onsubmit }: Props) {
     }
   };
   return (
-    <Form {...form}>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-1">
-        <FormField
-          name="code"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Verification Code</FormLabel>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div className="flex flex-col items-start gap-2">
-          <ResendButton handleClick={getVerificationCode} />
-          <div className="flex gap-2">
-            <Button
-              variant="default"
-              className="bg-[#4e1606] text-white hover:bg-[#4e1606] hover:opacity-80"
-              type="button"
-              onClick={onCancel}
-            >
-              Cancel
-            </Button>
-            <Button variant="default" className="bg-white text-[#4e1606] hover:bg-white hover:opacity-80" type="submit">
-              Verify
-            </Button>
+    <Modal open={open} onOpenChange={onCancel} title="Verify Email">
+      <Form {...form}>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-1">
+          <FormField
+            name="code"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Verification Code</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <div className="flex flex-col items-start gap-2">
+            <ResendButton handleClick={getVerificationCode} />
+            <div className="flex gap-2">
+              <Button
+                variant="default"
+                className="bg-[#4e1606] text-white hover:bg-[#4e1606] hover:opacity-80"
+                type="button"
+                onClick={onCancel}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="default"
+                className="bg-white text-[#4e1606] hover:bg-white hover:opacity-80"
+                type="submit"
+              >
+                Verify
+              </Button>
+            </div>
           </div>
-        </div>
-      </form>
-    </Form>
+        </form>
+      </Form>
+    </Modal>
   );
 }

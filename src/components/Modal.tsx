@@ -15,8 +15,8 @@ export default function Modal({
   className?: string;
 }) {
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className={cn("bg-background text-white", className)}>
+    <Dialog open={open} onOpenChange={onOpenChange} modal>
+      <DialogContent className={cn("bg-background text-white", className)} aria-describedby="">
         <DialogTitle className="text-center">
           <h3 className="text-3xl font-bold">{title}</h3>
         </DialogTitle>

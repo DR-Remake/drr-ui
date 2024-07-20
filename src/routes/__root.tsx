@@ -1,5 +1,8 @@
 import { Loader } from "@/components/Loader";
+import { validateUserSession } from "@/lib/utils";
 import { AuthActions, AuthState } from "@/types/zustand";
+import { useAuth } from "@/zustand/store";
+import { useQuery } from "@tanstack/react-query";
 import { createRootRouteWithContext, Navigate, Outlet } from "@tanstack/react-router";
 import NavBar from "../components/Header/NavBar";
 
@@ -7,11 +10,28 @@ export const Route = createRootRouteWithContext<Pick<AuthState, "isAuthenticated
   component: App,
   notFoundComponent: () => <Navigate to="/" replace />,
   wrapInSuspense: true,
-  pendingComponent: Loader,
-  loader: Loader
+  pendingComponent: Loader
 });
 
 function App() {
+  const login = useAuth((state) => state.login);
+
+  useQuery({
+    queryKey: ["validateUserSession"],
+    queryFn: async () => {
+      try {
+        const session = localStorage.getItem("session") ?? null;
+        if (!session) return { userSession: null };
+        const data = await validateUserSession({ session });
+        login({ isAuthenticated: data.isAuthenticated, user: data.user, token: session });
+
+        return;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  });
+
   return (
     <div className="flex h-full min-h-screen flex-col text-white">
       <div className="fixed inset-0 -z-10 size-full flex-1 bg-main-layout bg-cover bg-center bg-no-repeat"></div>
