@@ -1,0 +1,248 @@
+.left-arrow-animation {
+  display: block;
+  transition: all 0.1s;
+  width: 30px;
+  animation: left-arrow;
+  animation-duration: 2.5s;
+  animation-timing-function: ease-in-out;
+  animation-timing-function: steps(240000);
+}
+
+.right-arrow-animation {
+  display: block;
+  transition: all 0.1s;
+  width: 30px;
+  animation: right-arrow;
+  animation-duration: 2.5s;
+  animation-timing-function: ease-in-out;
+  animation-timing-function: steps(240000);
+}
+
+/*
+make an archery game animate the curve of the arrow
+then make the arrow rotate 180 degrees and back to 0 degrees
+and also make the arrow move from the top to the bottom of the screen
+with the curve animation
+*/
+
+@keyframes left-arrow {
+  from {
+    transform: rotate(-25deg) translateY(0%);
+  }
+  3% {
+    top: 20%;
+    left: 30%;
+    transform: rotate(-25deg) translateY(0%);
+  }
+  5% {
+    top: 19%;
+    left: 32%;
+    transform: rotate(-22deg) translateY(2%);
+  }
+  10% {
+    top: 18%;
+    left: 34%;
+    transform: rotate(-18deg) translateY(4%);
+  }
+  15% {
+    top: 17%;
+    left: 36%;
+    transform: rotate(-14deg) translateY(6%);
+  }
+  20% {
+    top: 16%;
+    left: 38%;
+    transform: rotate(-10deg) translateY(8%);
+  }
+  25% {
+    top: 15%;
+    left: 40%;
+    transform: rotate(-8deg) translateY(10%);
+  }
+  30% {
+    top: 14%;
+    left: 42%;
+    transform: rotate(-6deg) translateY(12%);
+  }
+  35% {
+    top: 13%;
+    left: 44%;
+    transform: rotate(-4deg) translateY(14%);
+  }
+  40% {
+    top: 12%;
+    left: 46%;
+    transform: rotate(-2deg) translateY(16%);
+  }
+  45% {
+    top: 11%;
+    left: 48%;
+    transform: rotate(-1deg) translateY(18%);
+  }
+  50% {
+    top: 10%;
+    left: 50%;
+    transform: translateY(20%);
+  }
+  55% {
+    top: 11%;
+    left: 52%;
+    transform: rotate(1deg) translateY(18%);
+  }
+  60% {
+    top: 12%;
+    left: 54%;
+    transform: rotate(2deg) translateY(16%);
+  }
+  65% {
+    top: 13%;
+    left: 56%;
+    transform: rotate(4deg) translateY(14%);
+  }
+  70% {
+    top: 14%;
+    left: 58%;
+    transform: rotate(6deg) translateY(12%);
+  }
+  75% {
+    top: 15%;
+    left: 60%;
+    transform: rotate(8deg) translateY(10%);
+  }
+  80% {
+    top: 16%;
+    left: 62%;
+    transform: rotate(10deg) translateY(8%);
+  }
+  85% {
+    top: 17%;
+    left: 64%;
+    transform: rotate(12deg) translateY(6%);
+  }
+  90% {
+    top: 18%;
+    left: 66%;
+    transform: rotate(14deg) translateY(4%);
+  }
+  95% {
+    top: 19%;
+    left: 68%;
+    transform: rotate(16deg) translateY(2%);
+  }
+  to {
+    top: 20%;
+    left: 70%;
+    transform: rotate(18deg) translateY(0%);
+  }
+}
+
+@keyframes right-arrow {
+  from {
+    transform: rotate(25deg) translateY(0%);
+  }
+  3% {
+    top: 20%;
+    right: 30%;
+    transform: rotate(25deg) translateY(0%);
+  }
+  5% {
+    top: 19%;
+    right: 32%;
+    transform: rotate(22deg) translateY(2%);
+  }
+  10% {
+    top: 18%;
+    right: 34%;
+    transform: rotate(18deg) translateY(4%);
+  }
+  15% {
+    top: 17%;
+    right: 36%;
+    transform: rotate(14deg) translateY(6%);
+  }
+  20% {
+    top: 16%;
+    right: 38%;
+    transform: rotate(10deg) translateY(8%);
+  }
+  25% {
+    top: 15%;
+    right: 40%;
+    transform: rotate(8deg) translateY(10%);
+  }
+  30% {
+    top: 14%;
+    right: 42%;
+    transform: rotate(6deg) translateY(12%);
+  }
+  35% {
+    top: 13%;
+    right: 44%;
+    transform: rotate(4deg) translateY(14%);
+  }
+  40% {
+    top: 12%;
+    right: 46%;
+    transform: rotate(2deg) translateY(16%);
+  }
+  45% {
+    top: 11%;
+    right: 48%;
+    transform: rotate(1deg) translateY(18%);
+  }
+  50% {
+    top: 10%;
+    right: 50%;
+    transform: translateY(20%);
+  }
+  55% {
+    top: 11%;
+    right: 52%;
+    transform: rotate(-1deg) translateY(18%);
+  }
+  60% {
+    top: 12%;
+    right: 54%;
+    transform: rotate(-2deg) translateY(16%);
+  }
+  65% {
+    top: 13%;
+    right: 56%;
+    transform: rotate(-4deg) translateY(14%);
+  }
+  70% {
+    top: 14%;
+    right: 58%;
+    transform: rotate(-6deg) translateY(12%);
+  }
+  75% {
+    top: 15%;
+    right: 60%;
+    transform: rotate(-8deg) translateY(10%);
+  }
+  80% {
+    top: 16%;
+    right: 62%;
+    transform: rotate(-10deg) translateY(8%);
+  }
+  85% {
+    top: 17%;
+    right: 64%;
+    transform: rotate(-12deg) translateY(6%);
+  }
+  90% {
+    top: 18%;
+    right: 66%;
+    transform: rotate(-14deg) translateY(4%);
+  }
+  95% {
+    top: 19%;
+    right: 68%;
+    transform: rotate(-16deg) translateY(2%);
+  }
+  to {
+    top: 20%;
+    right: 70%;
+    transform: rotate(-18deg) translateY(0%);
+  }
+}

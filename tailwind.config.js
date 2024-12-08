@@ -45,8 +45,13 @@ export default {
         }
       },
       backgroundImage: {
-        "drr-logo": "url('/src/assets/drr-logo.png')",
+        "dr-logo": "url('/src/assets/dr-logo.png')",
         "main-layout": "url('/src/assets/main-bg.jpg')",
+        "carousel-left": "url('/src/assets/carousel-left.png')",
+        "carousel-right": "url('/src/assets/carousel-right.png')",
+        "carousel-indicator": "url('/src/assets/carousel-indicator.png')",
+        "carousel-indicator-active": "url('/src/assets/carousel-indicator-active.png')",
+        "dr-characters": "url('/src/assets/dr-characters.png')",
         footer: "url('/src/assets/footer-bg.png')",
         modal: "url('/src/assets/modal-bg.png')"
       },
@@ -56,7 +61,7 @@ export default {
         sm: "calc(var(--radius) - 4px)"
       },
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans]
+        sans: ["Roboto", ...fontFamily.sans]
       },
       keyframes: {
         "accordion-down": {
