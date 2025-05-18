@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import useEmblaCarousel, { type UseEmblaCarouselType } from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -230,7 +230,7 @@ const CustomCarouselPrevious = React.forwardRef<HTMLButtonElement, React.Compone
         variant={variant}
         size={size}
         className={cn(
-          "absolute scale-75 sm:scale-100 h-16 w-20 rounded-full bg-carousel-left bg-top bg-no-repeat hover:bg-inherit hover:bg-bottom",
+          "absolute scale-75 sm:scale-100 h-16 w-20 rounded-full bg-(image:--img-carousel-left) bg-top bg-no-repeat hover:bg-inherit hover:bg-bottom",
           orientation === "horizontal"
             ? "left-4 sm:left-28 lg:left-20 xl:left-28 top-[95%] sm:top-full"
             : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
@@ -257,7 +257,7 @@ const CustomCarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentPr
         variant={variant}
         size={size}
         className={cn(
-          "absolute scale-75 sm:scale-100 h-16 w-20 rounded-full bg-carousel-right bg-no-repeat bg-top hover:bg-inherit hover:bg-bottom",
+          "absolute scale-75 sm:scale-100 h-16 w-20 rounded-full bg-(image:--img-carousel-right) bg-no-repeat bg-top hover:bg-inherit hover:bg-bottom",
           orientation === "horizontal"
             ? "right-4 sm:right-28 lg:right-20 xl:right-28 top-[95%] sm:top-full"
             : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",

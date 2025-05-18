@@ -17,7 +17,7 @@ function App() {
   return (
     <ModalsContextProvider>
       <div className="flex h-full min-h-screen flex-col text-white">
-        <div className="fixed inset-0 -z-10 size-full flex-1 bg-main-layout bg-cover bg-center bg-no-repeat" />
+        <div className="fixed inset-0 -z-10 size-full flex-1 bg-(image:--img-main-layout) bg-cover bg-center bg-no-repeat" />
         <ArrowAnimation />
         <header className="container flex justify-center bg-gradient-to-b from-black/90 to-transparent py-2 sm:px-16 md:justify-normal md:bg-none">
           <NavBar />
@@ -25,7 +25,7 @@ function App() {
         <div className="container m-auto flex flex-1 items-center px-8">
           <Outlet />
         </div>
-        <footer className="space-y-8 bg-footer bg-cover bg-center px-8 py-20 sm:space-y-0">
+        <footer className="space-y-8 bg-(image:--img-footer) bg-cover bg-center px-8 py-20 sm:space-y-0">
           <div className="flex flex-col items-center justify-center gap-8 font-semibold uppercase sm:flex-row sm:gap-4">
             <Link href="#">Home</Link>
             <p className="hidden sm:block">|</p>

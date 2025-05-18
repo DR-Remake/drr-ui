@@ -36,7 +36,7 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-16 lg:flex-row lg:justify-center lg:gap-4">
       <div className="relative w-full pt-20 lg:h-full lg:w-6/12 lg:pt-0">
-        <div className="absolute -top-20  -z-10 size-full  bg-dr-characters bg-top bg-no-repeat sm:bg-auto lg:-top-56 lg:left-36"></div>
+        <div className="absolute -top-20  -z-10 size-full  bg-(image:--img-dr-characters) bg-top bg-no-repeat sm:bg-auto lg:-top-56 lg:left-36"></div>
         <div className="relative size-full rounded-md p-2 sm:px-3 sm:py-4">
           <img src={carouselBoxBg} className="absolute inset-0 -z-10 w-full" alt="Carousel Box Background" />
           <Carousel
@@ -71,23 +71,23 @@ export default function Home() {
         </div>
         <div className="absolute left-1/2 flex -translate-x-1/2 translate-y-1.5 scale-75 gap-2 sm:translate-y-3 sm:scale-100">
           <div
-            className={cn("size-4 bg-carousel-indicator bg-cover bg-center", {
-              "bg-carousel-indicator-active": current === 1
+            className={cn("size-4 bg-(image:--img-carousel-indicator) bg-cover bg-center", {
+              "bg-(image:--img-carousel-indicator-active)": current === 1
             })}
           ></div>
           <div
-            className={cn("size-4 bg-carousel-indicator bg-cover bg-center", {
-              "bg-carousel-indicator-active": current === 2
+            className={cn("size-4 bg-(image:--img-carousel-indicator) bg-cover bg-center", {
+              "bg-(image:--img-carousel-indicator-active)": current === 2
             })}
           ></div>
           <div
-            className={cn("size-4 bg-carousel-indicator bg-cover bg-center", {
-              "bg-carousel-indicator-active": current === 3
+            className={cn("size-4 bg-(image:--img-carousel-indicator) bg-cover bg-center", {
+              "bg-(image:--img-carousel-indicator-active)": current === 3
             })}
           ></div>
         </div>
       </div>
-      <div className="relative w-full rounded-md p-10 lg:w-3/12">
+      <div className="relative w-full flex flex-col rounded-md p-10 lg:w-3/12">
         <img src={newsletterFormBg} className="absolute inset-0 -z-10 size-full" alt="Newsletter Form Background" />
         <NewsletterForm onSubmit={() => {}} />
       </div>
