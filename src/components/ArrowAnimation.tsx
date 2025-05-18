@@ -1,5 +1,5 @@
 import "@/animations.css";
-import arrow from "@/assets/dr_arrow/shapes/26.png";
+import arrow from "@/assets/dr_arrow/26.png";
 import { useEffect } from "react";
 
 interface Props {

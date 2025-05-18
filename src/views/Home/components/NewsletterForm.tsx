@@ -1,5 +1,5 @@
 import playNowButton from "@/assets/play_now_btn.png";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/Form";
 import { Input } from "@/components/ui/Input";
 import { siteConfig } from "@/config/siteConfig";
@@ -20,20 +20,17 @@ export default function NewsletterForm({ onSubmit }: Props) {
 
   const form = useForm({
     defaultValues: {
-      email: "",
-      username: "",
-      password: "",
-      confirmPassword: ""
+      email: ""
     },
     resolver: zodResolver(NewsletterSchema)
   });
 
   const { mutate: subscribe } = useMutation({
     mutationKey: ["subscribeNewsletterUser"],
-    mutationFn: async ({ email, password, username }: z.infer<typeof NewsletterSchema>) => {
+    mutationFn: async ({ email }: z.infer<typeof NewsletterSchema>) => {
       await fetch(`${siteConfig.env.BASE_API}/newsletter/subscribe`, {
         method: "POST",
-        body: JSON.stringify({ email, password, username }),
+        body: JSON.stringify({ email }),
         headers: {
           "Content-Type": "application/json"
         }
@@ -44,7 +41,7 @@ export default function NewsletterForm({ onSubmit }: Props) {
     }
   });
 
-  const submitHanlder = form.handleSubmit((data) => {
+  const submitHandler = form.handleSubmit((data) => {
     try {
       console.log(data);
       subscribe(data);
@@ -59,19 +56,7 @@ export default function NewsletterForm({ onSubmit }: Props) {
         <h1 className="text-xl font-bold uppercase">Newsletter</h1>
         {/* <p className="text-sm">Get the latest news and updates from us</p> */}
       </div>
-      <form onSubmit={submitHanlder} className="flex flex-col items-start gap-4">
-        <FormField
-          name="username"
-          render={({ field }) => (
-            <FormItem className="grid w-full grid-cols-4 items-center gap-x-2">
-              <FormLabel className="font-bold">Username</FormLabel>
-              <FormControl>
-                <Input className="col-span-3 w-full" {...field} />
-              </FormControl>
-              <FormMessage className="col-span-4 row-span-1 text-xs" />
-            </FormItem>
-          )}
-        />
+      <form onSubmit={submitHandler} className="flex flex-col grow justify-between gap-4">
         <FormField
           name="email"
           render={({ field }) => (
@@ -84,31 +69,7 @@ export default function NewsletterForm({ onSubmit }: Props) {
             </FormItem>
           )}
         />
-        <FormField
-          name="password"
-          render={({ field }) => (
-            <FormItem className="grid w-full grid-cols-4 items-center gap-x-2 space-y-1">
-              <FormLabel className="font-bold">Password</FormLabel>
-              <FormControl>
-                <Input className="col-span-3 w-full" {...field} type="password" />
-              </FormControl>
-              <FormMessage className="col-span-4 row-span-1 text-xs" />
-            </FormItem>
-          )}
-        />
-        <FormField
-          name="confirmPassword"
-          render={({ field }) => (
-            <FormItem className="grid w-full grid-cols-4 items-center gap-x-2 space-y-1">
-              <FormLabel className="font-bold">Confirm Password</FormLabel>
-              <FormControl>
-                <Input className="col-span-3 w-full" {...field} type="password" />
-              </FormControl>
-              <FormMessage className="col-span-4 row-span-1 text-xs" />
-            </FormItem>
-          )}
-        />
-        <Button type="submit" className="relative m-auto w-8/12">
+        <Button type="submit" className="relative mx-auto w-8/12">
           <img src={playNowButton} alt="play-now" className="absolute w-full" />
         </Button>
       </form>
